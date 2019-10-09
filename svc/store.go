@@ -17,8 +17,8 @@ type ScriptRecord struct {
 
 // Store is an interface that allows repository actions for Scripts
 type Store interface {
-	Put(ctx context.Context, user string, script *wts.Script) error
-	Get(ctx context.Context, user string, name string) (*wts.Script, error)
+	Put(ctx context.Context, user string, record *ScriptRecord) error
+	Get(ctx context.Context, user string, name string) (*ScriptRecord, error)
 }
 
 // WTSFirestore provides a store implementation via Google Firestore
@@ -27,9 +27,9 @@ type WTSFirestore struct {
 }
 
 // Put stores the script record in the database
-func (s *WTSFirestore) Put(ctx context.Context, user string, script *wts.Script) error {
-	doc := s.Client.Doc(fmt.Sprintf("%s/%s", user, script.Name))
-	_, err := doc.Create(ctx, script)
+func (s *WTSFirestore) Put(ctx context.Context, user string, record ScriptRecord) error {
+	doc := s.Client.Doc(fmt.Sprintf("%s/%s", user, record.Script.Name))
+	_, err := doc.Create(ctx, record)
 	if err != nil {
 		return err
 	}
@@ -37,17 +37,17 @@ func (s *WTSFirestore) Put(ctx context.Context, user string, script *wts.Script)
 }
 
 // Get retrieves the script record from the database
-func (s *WTSFirestore) Get(ctx context.Context, user, name string) (script *wts.Script, err error) {
+func (s *WTSFirestore) Get(ctx context.Context, user, name string) (record *ScriptRecord, err error) {
 	doc := s.Client.Doc(fmt.Sprintf("%s/%s", user, name))
 	docSnap, err := doc.Get(ctx)
 	if err != nil {
-		return script, err
+		return record, err
 	}
-	err = docSnap.DataTo(script)
+	err = docSnap.DataTo(record)
 	if err != nil {
-		return script, err
+		return record, err
 	}
-	return script, nil
+	return record, nil
 }
 
 // New WTSFirestore constructs a new firestore backed Store

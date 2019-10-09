@@ -9,10 +9,9 @@ import (
 
 // ScriptRecord is a model for storing scripts with contexual information
 type ScriptRecord struct {
-	ID     string
-	User   string
-	Public bool
-	Script *wts.Script
+	User   string      `json:"user,omitempty"`
+	Public bool        `json:"public,omitempty"`
+	Script *wts.Script `json:"script,omitempty"`
 }
 
 // Store is an interface that allows repository actions for Scripts

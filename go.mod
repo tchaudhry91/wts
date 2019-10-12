@@ -7,5 +7,6 @@ require (
 	cloud.google.com/go/firestore v1.0.0
 	github.com/boltdb/bolt v1.3.1
 	github.com/go-kit/kit v0.9.0
+	github.com/golang/protobuf v1.3.2
 	github.com/pkg/errors v0.8.1
 )

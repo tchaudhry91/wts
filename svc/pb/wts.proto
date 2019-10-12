@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package pb;
+
+message Script {
+    string name = 1;
+    string interpretter = 2;
+    string script = 3;
+    string checksum = 4; 
+}
+
+message ScriptRecord {
+    string user = 1;
+    bool public = 2;
+    Script script = 3;
+}
+
+message PutResponse {
+    string err = 1;
+}
+
+message GetRequest {
+    string name = 1;
+    string user = 2;
+}
+
+message GetResponse{
+    ScriptRecord record = 1;
+    string err = 2;
+}
+
+service WTS {
+    rpc Get (GetRequest) returns (GetResponse) {}
+    rpc Put (ScriptRecord) returns (PutResponse) {}
+}

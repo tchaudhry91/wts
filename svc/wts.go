@@ -9,6 +9,12 @@ type WTSService interface {
 	Get(ctx context.Context, user string, name string) (rec *ScriptRecord, err error)
 }
 
+func NewWTSService(store Store) WTSService {
+	return &wtsService{
+		S: store,
+	}
+}
+
 type wtsService struct {
 	S Store
 }

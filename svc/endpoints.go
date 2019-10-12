@@ -11,7 +11,7 @@ type Endpoints struct {
 	Get endpoint.Endpoint
 }
 
-func makeServerEndpoints(service WTSService) Endpoints {
+func MakeServerEndpoints(service WTSService) Endpoints {
 	return Endpoints{
 		Put: makePutEndpoint(service),
 		Get: makeGetEndpoint(service),

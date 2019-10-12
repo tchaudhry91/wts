@@ -9,6 +9,7 @@ require (
 	github.com/go-kit/kit v0.9.0
 	github.com/go-logfmt/logfmt v0.4.0 // indirect
 	github.com/golang/protobuf v1.3.2
+	github.com/peterbourgon/ff v1.6.0
 	github.com/pkg/errors v0.8.1
-	google.golang.org/grpc v1.21.1
+	google.golang.org/grpc v1.24.0
 )

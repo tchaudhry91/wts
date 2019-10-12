@@ -6,6 +6,18 @@ import (
 	"github.com/pkg/errors"
 )
 
+type Endpoints struct {
+	Put endpoint.Endpoint
+	Get endpoint.Endpoint
+}
+
+func makeServerEndpoints(service WTSService) Endpoints {
+	return Endpoints{
+		Put: makePutEndpoint(service),
+		Get: makeGetEndpoint(service),
+	}
+}
+
 type putRequest ScriptRecord
 
 type putResponse struct {

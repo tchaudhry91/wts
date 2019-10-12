@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"syscall"
-	"os/signal"
 	"flag"
+	"fmt"
 	"github.com/go-kit/kit/log"
 	kitgrpc "github.com/go-kit/kit/transport/grpc"
 	"github.com/peterbourgon/ff"
@@ -13,6 +11,8 @@ import (
 	"google.golang.org/grpc"
 	"net"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 func main() {
@@ -30,7 +30,7 @@ func main() {
 
 	var logger log.Logger
 	{
-		logger = log.NewLogfmtLogger(os.Stderr)
+		logger = log.NewJSONLogger(os.Stderr)
 		logger = log.With(logger, "ts", log.DefaultTimestampUTC)
 		logger = log.With(logger, "caller", log.DefaultCaller)
 	}
